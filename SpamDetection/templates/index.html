@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spam Email Classifier</title>
+    <style>
+        /* General body styling */
+        body {
+            font-family: Arial, sans-serif; /* Sets the font */
+            background-color: #2c2f33; /* Dark background color */
+            color: #ffffff; /* White text color */
+            margin: 0;
+            padding: 0;
+            display: flex; /* Flexbox layout */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            flex-direction: column; /* Stack elements vertically */
+            height: 100vh; /* Full viewport height */
+        }
+
+        /* Styling for the main container */
+        .container {
+            background-color: #23272a; /* Slightly darker background for the container */
+            padding: 20px; /* Padding inside the container */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0px 0px 10px 0px #000000; /* Shadow effect */
+            width: 50%; /* Container width set to 50% of the viewport */
+            max-width: 500px; /* Maximum width of the container */
+            text-align: center; /* Center align text */
+        }
+
+        /* Styling for the main heading */
+        h1 {
+            color: #7289da; /* Light blue color for the heading */
+        }
+
+        /* Center text in paragraphs */
+        p {
+            text-align: center;
+        }
+
+        /* Styling for the textarea */
+        textarea {
+            width: 100%; /* Full width */
+            height: 150px; /* Fixed height */
+            padding: 10px; /* Padding inside the textarea */
+            border-radius: 4px; /* Rounded corners */
+            border: 1px solid #99aab5; /* Border color */
+            margin-bottom: 20px; /* Space below the textarea */
+            font-size: 14px; /* Font size */
+            color: #23272a; /* Text color inside the textarea */
+        }
+
+        /* Styling for the buttons */
+        button {
+            width: 100%; /* Full width */
+            padding: 10px; /* Padding inside the button */
+            margin-bottom: 10px; /* Space below the button */
+            background-color: #7289da; /* Button background color */
+            border: none; /* Remove default border */
+            border-radius: 4px; /* Rounded corners */
+            color: #ffffff; /* Button text color */
+            font-size: 16px; /* Font size */
+            cursor: pointer; /* Pointer cursor on hover */
+        }
+
+        /* Button hover effect */
+        button:hover {
+            background-color: #5b6eae; /* Darker shade of blue on hover */
+        }
+
+        /* Styling for the result box */
+        .result-box {
+            text-align: center; /* Center align text */
+            padding: 10px; /* Padding inside the result box */
+            margin-top: 20px; /* Space above the result box */
+            border-radius: 4px; /* Rounded corners */
+        }
+
+        /* Background color for 'Ham' result */
+        .ham {
+            background-color: #43b581; /* Green color */
+        }
+
+        /* Background color for 'Spam' result */
+        .spam {
+            background-color: #f04747; /* Red color */
+        }
+
+        /* Styling for the menu section */
+        .menu {
+            margin-top: 20px; /* Space above the menu */
+        }
+    </style>
+</head>
+<body>
+    <!-- Main container for the email classifier -->
+    <div class="container">
+        <h1>Spam Email Classifier</h1>
+        <p>Paste your email content below to classify it as Spam or Ham.</p>
+        <!-- Form to submit email content -->
+        <form method="POST">
+            <textarea name="email_content" placeholder="Enter or paste the email content here..."></textarea>
+            <button type="submit">Analyze Email</button>
+        </form>
+
+        <!-- Display the result and confidence, if available -->
+        {% if result %}
+        <div class="result-box {% if result == 'Spam' %}spam{% else %}ham{% endif %}">
+            <h2>{{ result }}</h2>
+            <p>Confidence: {{ confidence * 100 | round(2) }}%</p>
+        </div>
+        {% endif %}
+    </div>
+
+   <div class="menu">
+    <button onclick="window.location.href='/distribution-chart'">Dataset Spam/Ham Distribution Pie Chart</button>
+    <button onclick="window.location.href='/accuracy-report'">Classifier Accuracy Report</button>
+    <button onclick="window.location.href='/evaluation-metrics'">Evaluation Metrics by Class</button>
+    <button onclick="window.location.href='/email-length-histogram'">Email Length Histogram</button>
+</div>
+
+</body>
+</html>
